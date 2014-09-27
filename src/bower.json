@@ -1,0 +1,8 @@
+{
+  "name": "word-count",
+  "private": true,
+  "dependencies": {
+    "jquery": "2.*",
+    "underscore": "1.*"
+  }
+}

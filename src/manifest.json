@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+
+  "name": "Word Count",
+  "short_name": "Word Count",
+  "description": "Counts words in selections.",
+  "version": "1.0.0",
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+
+  "browser_action": {
+    "default_title": "Show number of words selected",
+    "default_icon": {
+      "19": "icons/inactive-19.png",
+      "38": "icons/inactive-38.png"
+    }
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/underscore/underscore-min.js",
+        "content.js"
+      ]
+    }
+  ],
+
+  "icons": {
+    "16": "icons/active-16.png",
+    "48": "icons/active-48.png",
+    "128": "icons/active-128.png"
+  }
+}

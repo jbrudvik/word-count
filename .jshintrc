@@ -1,0 +1,17 @@
+{
+  "indent": 2,
+  "trailing": true,
+  "quotmark": "single",
+  "unused": true,
+  "undef": true,
+  "eqeqeq": true,
+  "newcap": true,
+  "forin": true,
+  "nonew": true,
+  "curly": true,
+  "bitwise": true,
+  "camelcase": true,
+  "expr": true,
+  "curly": false,
+  "browser": true
+}
