@@ -14,6 +14,111 @@ var SELECTION_CHANGE_EVENT = 'selectionChange';
 
 
 /*
+ * Functions for counting characters and words in selections and strings
+ */
+var textCount = {
+
+  /*
+   * Return the number of visible words in a string
+   */
+  wordCountInString: function (s) {
+    if (!s || !s.length) {
+      return 0;
+    }
+
+    // Consider a groups of newline whitespace to be one space each
+    s = s.replace(/[\n\r]+/g, ' ');
+
+    // Strip out control characters
+    s = s.replace(/[\x00-\x1f]/g, '');
+
+    // Remove leading and trailing whitespace, to be safe
+    s = s.trim();
+
+    // Split string on all whitespace into words
+    var words = s.split(/\s+/);
+
+    // Filter out falsy contents (e.g., empty words)
+    words = _.compact(words);
+
+    return words.length;
+  },
+
+  /*
+   * Return the number of visible characters in a string
+   */
+  characterCountInString: function(s) {
+    if (!s || !s.length) {
+      return 0;
+    }
+
+    // Consider a groups of newline whitespace to be one space each
+    s = s.replace(/[\n\r]+/g, ' ');
+
+    // Strip out control characters
+    s = s.replace(/[\x00-\x1f]/g, '');
+
+    return s.length;
+  },
+
+  /*
+   * Return the number of words in a selection
+   */
+  wordCountInSelection: function (selection) {
+    // TODO: Can I get rid of selection? Probably not -- because character
+    // count has special logic
+
+    var text = selection.toString();
+    return this.wordCountInString(text);
+  },
+
+  /*
+   * Return the number of characters in a selection
+   */
+  characterCountInSelection: function (selection) {
+    var text = selection.toString();
+    var count = this.characterCountInString(text);
+
+    // Fix naive count in corner cases
+
+    var anchorNode = selection.anchorNode; // node containing start of selection
+    var focusNode = selection.focusNode; // node containing end of selection
+
+    // If focus node is a text node, considerly slightly more accurate counting approaches
+    if (focusNode.nodeType === Node.TEXT_NODE) {
+
+      // If the anchor node and the focus node are the same, the count of words
+      // selected is the absolute difference of the anchor and focus offsets
+      if (anchorNode === focusNode) {
+        return Math.abs(selection.focusOffset - selection.anchorOffset);
+      }
+
+      // If focus node follows anchor node, selection.toString() sometimes includes
+      // trailing whitespace even if it isn't selected. Decrease count by one if there
+      // is a discrepancy with focusOffset.
+      if (anchorNode.compareDocumentPosition(focusNode) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        if (focusNode.data[selection.focusOffset - 1] !== text[text.length - 1]) {
+          return count - 1;
+        }
+      }
+
+      // If focus node trails anchor node, selection.toString() sometimes fails
+      // to include leading whitespace, even if it selected. Increase count by
+      // one if there is a discrepancy with focusOffset.
+      if (focusNode.compareDocumentPosition(anchorNode) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var leadingCharacter = focusNode.data[selection.focusOffset];
+        if (leadingCharacter && leadingCharacter !== text[0] && leadingCharacter === ' ') {
+            return count + 1;
+        }
+      }
+    }
+
+    return count;
+  }
+};
+
+
+/*
  * Creates and controls an element that displays word count information
  */
 function WordCountPopup() {
@@ -121,69 +226,18 @@ function EquatableSelection() {
   var selection = window.getSelection();
   if (selection && selection.rangeCount === 1) {
     this.text = selection.toString();
-    this.count = this._computeCount(selection);
+    this.wordCount = textCount.wordCountInSelection(selection);
+    this.characterCount = textCount.characterCountInSelection(selection);
   }
 }
-
-/*
- * (Private) Compute the number of words in a EquatableSelection
- */
-EquatableSelection.prototype._computeCount = function (selection) {
-  var text = selection.toString();
-
-  if (!text || !text.length) {
-    return 0;
-  }
-
-  // Consider a groups of newline whitespace to be one space each
-  text = text.replace(/[\n\r]+/g, ' ');
-
-  // Strip out control characters
-  text = text.replace(/[\x00-\x1f]/g, '');
-
-  var count = text.length;
-
-  var anchorNode = selection.anchorNode; // node containing start of selection
-  var focusNode = selection.focusNode; // node containing end of selection
-
-  // If focus node is a text node, considerly slightly more accurate counting approaches
-  if (focusNode.nodeType === Node.TEXT_NODE) {
-
-    // If the anchor node and the focus node are the same, the count of words
-    // selected is the absolute difference of the anchor and focus offsets
-    if (anchorNode === focusNode) {
-      return Math.abs(selection.focusOffset - selection.anchorOffset);
-    }
-
-    // If focus node follows anchor node, selection.toString() sometimes includes
-    // trailing whitespace even if it isn't selected. Decrease count by one if there
-    // is a discrepancy with focusOffset.
-    if (anchorNode.compareDocumentPosition(focusNode) & Node.DOCUMENT_POSITION_FOLLOWING) {
-      if (focusNode.data[selection.focusOffset - 1] !== text[text.length - 1]) {
-        return count - 1;
-      }
-    }
-
-    // If focus node trails anchor node, selection.toString() sometimes fails
-    // to include leading whitespace, even if it selected. Increase count by
-    // one if there is a discrepancy with focusOffset.
-    if (focusNode.compareDocumentPosition(anchorNode) & Node.DOCUMENT_POSITION_FOLLOWING) {
-      var leadingCharacter = focusNode.data[selection.focusOffset];
-      if (leadingCharacter && leadingCharacter !== text[0] && leadingCharacter === ' ') {
-          return count + 1;
-      }
-    }
-  }
-
-  return count;
-};
 
 /*
  * Return true if two EquatableSelection objects are equal, false otherwise
  */
 EquatableSelection.prototype.isEqual = function (other) {
   return other &&
-    this.count === other.count &&
+    this.wordCount === other.wordCount &&
+    this.characterCount === other.characterCount &&
     this.text === other.text;
 };
 
@@ -228,7 +282,7 @@ function SelectionListener(target) {
 SelectionListener.prototype.handleEvent = function (event) {
   var current = new EquatableSelection();
 
-  if (current && current.count) {
+  if (current) {
     if (!current.isEqual(this.previous)) {
       // Trigger a selectionChange event if this selection is not equal to
       // the previously-observed selection
@@ -311,7 +365,7 @@ var selectionListener = new SelectionListener(target);
 // Listen for selection changes and show/hide the popup based on the number of
 // words selected
 $(target).on(SELECTION_CHANGE_EVENT, function (event) {
-  var count = event.selection ? event.selection.count : 0;
+  var count = event.selection ? event.selection.wordCount : 0;
   popup.show(count);
 });
 
