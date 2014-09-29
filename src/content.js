@@ -2,7 +2,7 @@
  * Word Count content script
  */
 
-/* global chrome:false, $:false, _:false */
+/* global chrome:false, $:false, _:false, pluralize:false */
 /* jshint bitwise:false */
 
 
@@ -11,6 +11,7 @@
  */
 var ESCAPE_KEY = 27;
 var SELECTION_CHANGE_EVENT = 'selectionChange';
+var COUNTED_NOUN = 'word';
 
 
 /*
@@ -65,9 +66,6 @@ var textCount = {
    * Return the number of words in a selection
    */
   wordCountInSelection: function (selection) {
-    // TODO: Can I get rid of selection? Probably not -- because character
-    // count has special logic
-
     var text = selection.toString();
     return this.wordCountInString(text);
   },
@@ -120,8 +118,15 @@ var textCount = {
 
 /*
  * Creates and controls an element that displays word count information
+ *
+ * Parameters:
+ * - noun (string): The noun being counted. Will be displayed in popup. (default: undefined)
+ * - pluralize (boolean): Option to attempt to pluralize noun when appropriate (default: true)
  */
-function WordCountPopup() {
+function CountPopup(noun, pluralize) {
+  this.noun = noun;
+  this.pluralize = (pluralize !== undefined) ? pluralize : true;
+
   this.$popup = $('<div>', { id: 'word-count-popup' }).css({
     'position': 'fixed',
     'z-index': 2147483647,
@@ -146,7 +151,7 @@ function WordCountPopup() {
     'border-radius': 0
   });
 
-  this.namespace = 'WordCountPopup';
+  this.namespace = 'CountPopup';
   this.isShowing = false;
 }
 
@@ -156,7 +161,7 @@ function WordCountPopup() {
  * Fixed CSS positioning does not always hold, so force the correct absolute
  * position if necessary.
  */
-WordCountPopup.prototype.setToWindowTop = function () {
+CountPopup.prototype.setToWindowTop = function () {
   var popupTop = this.$popup.offset().top;
   var scrollTop = window.scrollY;
   if (popupTop !== scrollTop && scrollTop >= 0) {
@@ -170,8 +175,12 @@ WordCountPopup.prototype.setToWindowTop = function () {
 /*
  * Return message for given count (required)
  */
-WordCountPopup.prototype.getMessageForCount = function (count) {
-  return count + ' word' + (count === 1 ? '' : 's') + ' selected';
+CountPopup.prototype.getMessageForCount = function (count) {
+  var message = '' + count;
+  if (this.noun) {
+    message += ' ' + pluralize(this.noun, this.pluralize ? count : 1);
+  }
+  return message;
 };
 
 /*
@@ -179,7 +188,7 @@ WordCountPopup.prototype.getMessageForCount = function (count) {
  *
  * If count is undefined or 0, popup will be hidden.
  */
-WordCountPopup.prototype.show = function (count) {
+CountPopup.prototype.show = function (count) {
   if (!count) {
     this.hide();
   } else {
@@ -204,7 +213,7 @@ WordCountPopup.prototype.show = function (count) {
 /*
  * Hide word count popup
  */
-WordCountPopup.prototype.hide = function () {
+CountPopup.prototype.hide = function () {
   // When hidden, don't listen to scroll events to limit performance impact
   $(window).off('scroll.' + this.namespace);
   this.$popup.remove();
@@ -359,7 +368,7 @@ SelectionListener.prototype.toggle = function () {
  * Instantiate popup and and listeners
  */
 var target = window;
-var popup = new WordCountPopup();
+var popup = new CountPopup(COUNTED_NOUN);
 var selectionListener = new SelectionListener(target);
 
 // Listen for selection changes and show/hide the popup based on the number of

@@ -28,6 +28,7 @@
       "js": [
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/underscore/underscore-min.js",
+        "bower_components/pluralize/pluralize.js",
         "content.js"
       ]
     }

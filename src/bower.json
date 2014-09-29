@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "jquery": "2.*",
-    "underscore": "1.*"
+    "underscore": "1.*",
+    "pluralize": "1.*"
   }
 }
