@@ -20,7 +20,7 @@ var COUNTED_NOUN = 'word';
 var textCount = {
 
   /*
-   * Return the number of visible words in a string
+   * Return the number of visible, alphanumeric words in a string
    */
   wordCountInString: function (s) {
     if (!s || !s.length) {
@@ -38,6 +38,11 @@ var textCount = {
 
     // Split string on all whitespace into words
     var words = s.split(/\s+/);
+
+    // Keep only words containing at least on alphanumeric character
+    words = _.filter(words, function (word) {
+      return /[a-zA-Z0-9]+/.test(word);
+    });
 
     // Filter out falsy contents (e.g., empty words)
     words = _.compact(words);
