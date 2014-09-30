@@ -117,17 +117,14 @@ var textCount = {
 
 
 /*
- * Creates and controls an element that displays word count information
+ * A popup that displays a message in a window corner.
  *
- * Parameters:
- * - noun (string): The noun being counted. Will be displayed in popup. (default: undefined)
- * - pluralize (boolean): Option to attempt to pluralize noun when appropriate (default: true)
+ * Always-on-top, yet unobtrusive.
+ *
+ * May be shown and hidden.
  */
-function CountPopup(noun, pluralize) {
-  this.noun = noun;
-  this.pluralize = (pluralize !== undefined) ? pluralize : true;
-
-  this.$popup = $('<div>', { id: 'word-count-popup' }).css({
+function CornerPopup() {
+  this.$popup = $('<div>', { id: 'corner-popup' }).css({
     'position': 'fixed',
     'z-index': 2147483647,
     'top': 0,
@@ -151,7 +148,7 @@ function CountPopup(noun, pluralize) {
     'border-radius': 0
   });
 
-  this.namespace = 'CountPopup';
+  this.namespace = 'CornerPopup';
   this.isShowing = false;
 }
 
@@ -161,7 +158,7 @@ function CountPopup(noun, pluralize) {
  * Fixed CSS positioning does not always hold, so force the correct absolute
  * position if necessary.
  */
-CountPopup.prototype.setToWindowTop = function () {
+CornerPopup.prototype.setToWindowTop = function () {
   var popupTop = this.$popup.offset().top;
   var scrollTop = window.scrollY;
   if (popupTop !== scrollTop && scrollTop >= 0) {
@@ -173,47 +170,38 @@ CountPopup.prototype.setToWindowTop = function () {
 };
 
 /*
- * Return message for given count (required)
- */
-CountPopup.prototype.getMessageForCount = function (count) {
-  var message = '' + count;
-  if (this.noun) {
-    message += ' ' + pluralize(this.noun, this.pluralize ? count : 1);
-  }
-  return message;
-};
-
-/*
- * Display word count popup with given count.
+ * Display message in popup.
  *
- * If count is undefined or 0, popup will be hidden.
+ * If message is falsy, popup will be hidden.
+ *
+ * Parameters:
+ * - message (string): The message to be displayed (required)
  */
-CountPopup.prototype.show = function (count) {
-  if (!count) {
+CornerPopup.prototype.show = function (message) {
+  if (!message) {
     this.hide();
-  } else {
-    var message = this.getMessageForCount(count);
-    this.$popup.html(message);
+  }
 
-    if (!this.isShowing) {
-      this.isShowing = true;
+  this.$popup.html(message);
 
-      this.$popup.appendTo(document.body);
-      this.setToWindowTop();
+  if (!this.isShowing) {
+    this.isShowing = true;
 
-      // When scrolling, ensure that popup stays where it should be
-      var self = this;
-      $(window).on('scroll.' + this.namespace, function () {
-        self.setToWindowTop();
-      });
-    }
+    this.$popup.appendTo(document.body);
+    this.setToWindowTop();
+
+    // Ensure that popup stays where it should be when scrolling
+    var self = this;
+    $(window).on('scroll.' + this.namespace, function () {
+      self.setToWindowTop();
+    });
   }
 };
 
 /*
- * Hide word count popup
+ * Hide popup
  */
-CountPopup.prototype.hide = function () {
+CornerPopup.prototype.hide = function () {
   // When hidden, don't listen to scroll events to limit performance impact
   $(window).off('scroll.' + this.namespace);
   this.$popup.remove();
@@ -225,7 +213,7 @@ CountPopup.prototype.hide = function () {
  * An object for observing and comparing current text selections.
  *
  * When instantiated, captures the current selection and computes a count
- * of words selected.
+ * of words and characters selected.
  *
  * May be compared for equality against other EquatableSelection instances.
  *
@@ -368,14 +356,19 @@ SelectionListener.prototype.toggle = function () {
  * Instantiate popup and and listeners
  */
 var target = window;
-var popup = new CountPopup(COUNTED_NOUN);
+var popup = new CornerPopup();
 var selectionListener = new SelectionListener(target);
 
 // Listen for selection changes and show/hide the popup based on the number of
 // words selected
 $(target).on(SELECTION_CHANGE_EVENT, function (event) {
   var count = event.selection ? event.selection.wordCount : 0;
-  popup.show(count);
+  if (!count) {
+    popup.hide();
+  } else {
+    var message = count + ' ' + pluralize(COUNTED_NOUN, count);
+    popup.show(message);
+  }
 });
 
 // Listen for messages from other parts of the extension to start/stop selection listening
