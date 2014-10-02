@@ -20,7 +20,9 @@ var COUNTED_NOUN = 'word';
 var textCount = {
 
   /*
-   * Return the number of visible, alphanumeric words in a string
+   * Return the number of visible words in a string.
+   *
+   * Words contain at least one alphanumeric character.
    */
   wordCountInString: function (s) {
     if (!s || !s.length) {
