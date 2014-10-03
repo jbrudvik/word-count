@@ -20,6 +20,15 @@ var COUNTED_NOUN = 'word';
 var textCount = {
 
   /*
+   * Return true if string parameter contains at least one "alphanumeric" character.
+   *
+   * Includes extended Latin, Greek, Coptic, Cyrillic, Armenian, Hebrew, Syriac, Arabic.
+   */
+  containsAlphanumericCharacter: function (s) {
+    return /[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u024F\u0374-\u058F\u05D0-\u05F4\u0622-\u0669\u066E-\u06D3\u06D5\u06EE-\u06FF\u0710-\u072F\u074D-\u074F\u0750-\u077F]+/.test(s);
+  },
+
+  /*
    * Return the number of visible words in a string.
    *
    * Words contain at least one alphanumeric character.
@@ -42,10 +51,7 @@ var textCount = {
     var words = s.split(/\s+/);
 
     // Keep only words containing at least on alphanumeric character
-    // Include extended Latin, Greek, Coptic, Cyrillic, Armenian, Hebrew, Syriac, Arabic
-    words = _.filter(words, function (word) {
-      return /[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u024F\u0374-\u058F\u05D0-\u05F4\u0622-\u0669\u066E-\u06D3\u06D5\u06EE-\u06FF\u0710-\u072F\u074D-\u074F\u0750-\u077F]+/.test(word);
-    });
+    words = _.filter(words, this.containsAlphanumericCharacter);
 
     // Filter out falsy contents (e.g., empty words)
     words = _.compact(words);
