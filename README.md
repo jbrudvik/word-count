@@ -6,6 +6,8 @@ A Google Chrome extension for viewing the number of words in text selections. Wh
 - Quickly view the number of words on an entire page using keyboard shortcut (OS X: CMD-a, Windows: CTRL-a).
 - Click the extension button to activate/deactivate. The ESC key can also be used to deactivate.
 
+Words are counted by splitting text on whitespace and including groups of characters if they contain at least one "alphanumeric" character.
+
 
 ## Development
 
