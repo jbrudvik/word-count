@@ -142,12 +142,38 @@ var textCount = {
  *
  * May be shown and hidden.
  */
-function CornerPopup() {
-  this.$popup = $('<div>', { id: 'corner-popup' }).css({
-    'position': 'fixed',
-    'z-index': 0x7fffffff, // In most browsers: max z-index === max 32-bit signed integer
-    'top': 0,
-    'right': 0,
+function CornerPopup(id) {
+
+  this.$container = $('#corner-popup');
+
+  if (!this.$container.length) {
+    this.$container = $('<div>', { id: 'corner-popup' }).css({
+      'position': 'fixed',
+      'z-index': 0x7fffffff, // In most browsers: max z-index === max 32-bit signed integer
+      'top': 0,
+      'right': 0,
+      'width': 'auto',
+      'height': 'auto',
+      'margin': 0,
+      'padding': 0,
+      'border': 'none',
+      'outline': 'none',
+      'box-shadow': 'none',
+      'background-color': 'inherit',
+      'font-size': '14px',
+      'line-height': 1,
+      'text-decoration': 'none',
+      'vertical-align': 'baseline',
+      'user-select': 'none',
+      'pointer-events': 'none',
+      'border-radius': 0
+    });
+
+    this.$container.appendTo(document.body);
+  }
+
+  this.$popup = $('<div>', { id: id }).css({
+    'text-align': 'right',
     'width': 'auto',
     'height': 'auto',
     'margin': 0,
@@ -155,19 +181,19 @@ function CornerPopup() {
     'border': 'none',
     'outline': 'none',
     'box-shadow': 'none',
-    'background-color': 'rgba(255, 255, 255, 0.8)',
     'color': '#333',
+    'background-color': 'rgba(255, 255, 255, 0.8)',
     'font-family': 'Menlo, Consolas, "Liberation Mono", monospace',
-    'font-size': '14px',
-    'line-height': 1,
-    'text-decoration': 'none',
-    'vertical-align': 'baseline',
-    'user-select': 'none',
-    'pointer-events': 'none',
+    'font-size': 'inherit',
+    'line-height': 'inherit',
+    'text-decoration': 'inherit',
+    'vertical-align': 'inherit',
+    'user-select': 'inherit',
+    'pointer-events': 'inherit',
     'border-radius': 0
   });
 
-  this.namespace = 'CornerPopup';
+  this.namespace = 'CornerPopup-' + id;
   this.isShowing = false;
 }
 
@@ -178,10 +204,10 @@ function CornerPopup() {
  * position if necessary.
  */
 CornerPopup.prototype.setToWindowTop = function () {
-  var popupTop = this.$popup.offset().top;
+  var popupTop = this.$container.offset().top;
   var scrollTop = window.scrollY;
   if (popupTop !== scrollTop && scrollTop >= 0) {
-    this.$popup.css({
+    this.$container.css({
       'position': 'absolute',
       'top': scrollTop
     });
@@ -206,7 +232,7 @@ CornerPopup.prototype.show = function (message) {
   if (!this.isShowing) {
     this.isShowing = true;
 
-    this.$popup.appendTo(document.body);
+    this.$container.append(this.$popup);
     this.setToWindowTop();
 
     // Ensure that popup stays where it should be when scrolling
