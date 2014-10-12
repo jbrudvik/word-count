@@ -144,10 +144,11 @@ var textCount = {
  */
 function CornerPopup(id) {
 
-  this.$container = $('#corner-popup');
+  var containerId = 'b83edd14-d692-4775-a488-9bb3d146dc6d';
+  this.$container = $('#' + containerId);
 
   if (!this.$container.length) {
-    this.$container = $('<div>', { id: 'corner-popup' }).css({
+    this.$container = $('<div>', { id: containerId }).css({
       'position': 'fixed',
       'z-index': 0x7fffffff, // In most browsers: max z-index === max 32-bit signed integer
       'top': 0,
