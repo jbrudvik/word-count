@@ -194,7 +194,7 @@ function CornerPopup(id) {
     'border-radius': 0
   });
 
-  this.namespace = 'CornerPopup-' + id;
+  this.namespace = containerId + '-' + id;
   this.isShowing = false;
 }
 
