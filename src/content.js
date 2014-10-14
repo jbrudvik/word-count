@@ -11,7 +11,6 @@
  */
 var ESCAPE_KEY = 27;
 var SELECTION_CHANGE_EVENT = 'selectionChange';
-var COUNTED_NOUN = 'word';
 
 
 /*
@@ -141,6 +140,9 @@ var textCount = {
  * Always-on-top, yet unobtrusive.
  *
  * May be shown and hidden.
+ *
+ * Parameters:
+ * - id (string): The id of the corner popup. Used for determining order. (required)
  */
 function CornerPopup(id) {
 
@@ -216,6 +218,34 @@ CornerPopup.prototype.setToWindowTop = function () {
 };
 
 /*
+ * Inserts an element underneath a container element in position maintains
+ * sorted order of child elements by given attr.
+ *
+ * Assumptions:
+ * - Existing children of container are sorted by attr
+ *
+ * Parameters:
+ * - element: The element to be inserted (required)
+ * - container: The element under which element will be inserted (required)
+ * - attr (string): The attribute by which child elements are sorted (default: id)
+ */
+CornerPopup.prototype.insertSortedByAttr = function (element, container, attr) {
+  attr = attr || 'id';
+  var $element = $(element);
+  var $container = $(container);
+  var $children = $($container.children());
+  var childIds = $children.map(function (index, child) {
+    return(child.id);
+  });
+  var index = _.sortedIndex(childIds, $element.attr(attr));
+  if (!index) {
+    $element.prependTo($container);
+  } else {
+    $element.insertAfter($($children[index - 1]));
+  }
+};
+
+/*
  * Display message in popup.
  *
  * If message is falsy, popup will be hidden.
@@ -233,7 +263,8 @@ CornerPopup.prototype.show = function (message) {
   if (!this.isShowing) {
     this.isShowing = true;
 
-    this.$container.append(this.$popup);
+    this.insertSortedByAttr(this.$popup, this.$container);
+
     this.setToWindowTop();
 
     // Ensure that popup stays where it should be when scrolling
@@ -402,7 +433,9 @@ SelectionListener.prototype.toggle = function () {
  * Instantiate popup and and listeners
  */
 var target = window;
-var popup = new CornerPopup();
+var countedNoun = 'word';
+var popup = new CornerPopup(countedNoun);
+
 var selectionListener = new SelectionListener(target);
 
 // Listen for selection changes and show/hide the popup based on the number of
@@ -412,7 +445,7 @@ $(target).on(SELECTION_CHANGE_EVENT, function (event) {
   if (!count) {
     popup.hide();
   } else {
-    var message = count + ' ' + pluralize(COUNTED_NOUN, count);
+    var message = count + ' ' + pluralize(countedNoun, count);
     popup.show(message);
   }
 });
