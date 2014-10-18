@@ -2,7 +2,7 @@
 /* global _:false */
 /* jshint bitwise:false */
 
-(function(root, undefined) {
+(function(window, undefined) {
 
   /*
    * Functions for counting characters and words in selections and strings
@@ -124,6 +124,6 @@
     }
   };
 
-  root.textCount = textCount;
+  window.textCount = textCount;
 
 })(this);
