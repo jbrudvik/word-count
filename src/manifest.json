@@ -30,7 +30,7 @@
         "bower_components/underscore/underscore-min.js",
         "bower_components/pluralize/pluralize.js",
         "lib/corner-popup.js",
-        "lib/text-count.js",
+        "lib/textistics.js",
         "lib/equatable-selection.js",
         "lib/selection-listener.js",
         "content.js"

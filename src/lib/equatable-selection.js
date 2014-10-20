@@ -1,5 +1,5 @@
 
-/* global textCount:false */
+/* global textistics:false */
 
 (function (window, undefined) {
 
@@ -17,8 +17,8 @@
     var selection = window.getSelection();
     if (selection && selection.rangeCount === 1) {
       this.text = selection.toString();
-      this.wordCount = textCount.wordCountInSelection(selection);
-      this.characterCount = textCount.characterCountInSelection(selection);
+      this.wordCount = textistics.wordCountInSelection(selection);
+      this.characterCount = textistics.characterCountInSelection(selection);
     }
   }
 

@@ -7,7 +7,7 @@
   /*
    * Functions for counting characters and words in selections and strings
    */
-  var textCount = {
+  var textistics = {
 
     /*
      * Regex matching at least one "alphanumeric" character.
@@ -124,6 +124,6 @@
     }
   };
 
-  window.textCount = textCount;
+  window.textistics = textistics;
 
 })(this);
