@@ -11,7 +11,7 @@
    * May be shown and hidden.
    *
    * Parameters:
-   * - id (string): The id of the corner popup. Used for determining order. (required)
+   * - id (string): Used for determining content order (required for consistent ordering)
    */
   function CornerPopup(id) {
 
