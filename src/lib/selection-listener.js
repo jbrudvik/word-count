@@ -41,6 +41,8 @@
    * Handle events and check for selection changes.
    *
    * Trigger selectionChange event if a selection change has occurred.
+   *
+   * selectionChange event includes EquatableSelection `selection` property.
    */
   SelectionListener.prototype.handleEvent = function (event) {
     var current = new EquatableSelection();
