@@ -29,7 +29,7 @@
         "bower_components/jquery/dist/jquery.min.js",
         "bower_components/underscore/underscore-min.js",
         "bower_components/pluralize/pluralize.js",
-        "lib/corner-popup.js",
+        "lib/periphery-label.js",
         "lib/textistics.js",
         "lib/equatable-selection.js",
         "lib/selection-listener.js",

@@ -4,16 +4,16 @@
 (function (window, undefined) {
 
   /*
-   * A popup that displays a message in a window corner.
+   * A label that displays a message on the periphery.
    *
-   * Always-on-top, yet unobtrusive.
+   * If multiple periphery labels exist, they will be grouped together.
    *
    * May be shown and hidden.
    *
    * Parameters:
    * - id (string): Used for determining content order (required for consistent ordering)
    */
-  function CornerPopup(id) {
+  function PeripheryLabel(id) {
 
     var containerId = 'b83edd14-d692-4775-a488-9bb3d146dc6d';
     this.$container = $('#' + containerId);
@@ -44,7 +44,7 @@
       this.$container.appendTo(document.body);
     }
 
-    this.$popup = $('<div>', { id: id }).css({
+    this.$label = $('<div>', { id: id }).css({
       'text-align': 'right',
       'width': 'auto',
       'height': 'auto',
@@ -70,15 +70,15 @@
   }
 
   /*
-   * Ensure the popup is located at top of window.
+   * Ensure the label is located at top of window.
    *
    * Fixed CSS positioning does not always hold, so force the correct absolute
    * position if necessary.
    */
-  CornerPopup.prototype.setToWindowTop = function () {
-    var popupTop = this.$container.offset().top;
+  PeripheryLabel.prototype.setToWindowTop = function () {
+    var labelTop = this.$container.offset().top;
     var scrollTop = window.scrollY;
-    if (popupTop !== scrollTop && scrollTop >= 0) {
+    if (labelTop !== scrollTop && scrollTop >= 0) {
       this.$container.css({
         'position': 'absolute',
         'top': scrollTop
@@ -98,7 +98,7 @@
    * - container: The element under which element will be inserted (required)
    * - attr (string): The attribute by which child elements are sorted (default: id)
    */
-  CornerPopup.prototype.insertSortedByAttr = function (element, container, attr) {
+  PeripheryLabel.prototype.insertSortedByAttr = function (element, container, attr) {
     attr = attr || 'id';
     var $element = $(element);
     var $container = $(container);
@@ -115,28 +115,28 @@
   };
 
   /*
-   * Display message in popup.
+   * Display message in label.
    *
-   * If message is falsy, popup will be hidden.
+   * If message is falsy, label will be hidden.
    *
    * Parameters:
    * - message (string): The message to be displayed (required)
    */
-  CornerPopup.prototype.show = function (message) {
+  PeripheryLabel.prototype.show = function (message) {
     if (!message) {
       this.hide();
     }
 
-    this.$popup.html(message);
+    this.$label.html(message);
 
     if (!this.isShowing) {
       this.isShowing = true;
 
-      this.insertSortedByAttr(this.$popup, this.$container);
+      this.insertSortedByAttr(this.$label, this.$container);
 
       this.setToWindowTop();
 
-      // Ensure that popup stays where it should be when scrolling
+      // Ensure that label stays where it should be when scrolling
       var self = this;
       $(window).on('scroll.' + this.namespace, function () {
         self.setToWindowTop();
@@ -145,15 +145,15 @@
   };
 
   /*
-   * Hide popup
+   * Hide label
    */
-  CornerPopup.prototype.hide = function () {
+  PeripheryLabel.prototype.hide = function () {
     // When hidden, don't listen to scroll events to limit performance impact
     $(window).off('scroll.' + this.namespace);
-    this.$popup.remove();
+    this.$label.remove();
     this.isShowing = false;
   };
 
-  window.CornerPopup = CornerPopup;
+  window.PeripheryLabel = PeripheryLabel;
 
 })(this);

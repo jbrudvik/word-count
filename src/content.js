@@ -2,14 +2,14 @@
  * Word Count content script
  */
 
-/* global chrome:false, $:false, pluralize:false, CornerPopup:false, SelectionListener:false */
+/* global chrome:false, $:false, pluralize:false, PeripheryLabel:false, SelectionListener:false */
 
 
 /*
  * Instantiate popup and and listeners
  */
 var COUNTED_NOUN = 'word';
-var popup = new CornerPopup(COUNTED_NOUN);
+var popup = new PeripheryLabel(COUNTED_NOUN);
 
 var selectionListener = new SelectionListener(window);
 
