@@ -5,6 +5,6 @@
     "jquery": "2.*",
     "underscore": "1.*",
     "pluralize": "1.*",
-    "equatable-selection": "0.*"
+    "selection-listener": "0.*"
   }
 }

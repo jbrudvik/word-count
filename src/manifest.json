@@ -31,7 +31,7 @@
         "bower_components/pluralize/pluralize.js",
         "bower_components/textistics/textistics.js",
         "bower_components/equatable-selection/equatable-selection.js",
-        "lib/selection-listener.js",
+        "bower_components/selection-listener/selection-listener.js",
         "lib/periphery-label.js",
         "content.js"
       ]
