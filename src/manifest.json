@@ -30,9 +30,9 @@
         "bower_components/underscore/underscore-min.js",
         "bower_components/pluralize/pluralize.js",
         "bower_components/textistics/textistics.js",
-        "lib/periphery-label.js",
-        "lib/equatable-selection.js",
+        "bower_components/equatable-selection/equatable-selection.js",
         "lib/selection-listener.js",
+        "lib/periphery-label.js",
         "content.js"
       ]
     }
