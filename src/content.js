@@ -6,21 +6,20 @@
 
 
 /*
- * Instantiate popup and and listeners
+ * Instantiate label and and listeners
  */
 var COUNTED_NOUN = 'word';
-var popup = new PeripheryLabel(COUNTED_NOUN);
-
+var label = new PeripheryLabel(COUNTED_NOUN);
 var selectionListener = new SelectionListener(window);
 
-// Listen for selection changes and show/hide the popup based on the number of words selected
+// Listen for selection changes and show/hide the label based on the number of words selected
 $(window).on(SelectionListener.SELECTION_CHANGE_EVENT, function (event) {
   var count = event.selection ? event.selection.wordCount : 0;
   if (!count) {
-    popup.hide();
+    label.hide();
   } else {
     var message = count + ' ' + pluralize(COUNTED_NOUN, count);
-    popup.show(message);
+    label.show(message);
   }
 });
 
