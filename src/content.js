@@ -1,6 +1,3 @@
-/*
- * Word Count content script
- */
 
 /* global chrome:false, $:false, pluralize:false, PeripheryLabel:false, SelectionListener:false */
 

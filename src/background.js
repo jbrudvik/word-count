@@ -1,6 +1,3 @@
-/*
- * Word Count background script
- */
 
 /* global chrome:false */
 
