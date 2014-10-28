@@ -2,9 +2,6 @@
   "name": "word-count",
   "private": true,
   "dependencies": {
-    "jquery": "2.*",
-    "pluralize": "1.*",
-    "selection-listener": "0.*",
-    "periphery-label": "0.*"
+    "selection-counter": "0.*"
   }
 }
