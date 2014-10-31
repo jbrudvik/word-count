@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+/* global safari:false */
+
+
+function handleCommand(event) {
+  if (event.command === 'toggle') {
+    safari.application.activeBrowserWindow.activeTab.page.dispatchMessage('toggle');
+  }
+}
+
+safari.application.addEventListener('command', handleCommand, false);
+
+</script>
+</head>
+</html>

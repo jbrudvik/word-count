@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Jeremy Brudvik</string>
+	<key>Builder Version</key>
+	<string>10600.1.25</string>
+	<key>CFBundleDisplayName</key>
+	<string>Word Count</string>
+	<key>CFBundleIdentifier</key>
+	<string>me.brudvik.word-count</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>toggle</string>
+				<key>Identifier</key>
+				<string>toolbarButton</string>
+				<key>Image</key>
+				<string>toolbar.png</string>
+				<key>Label</key>
+				<string>Word Count</string>
+				<key>Palette Label</key>
+				<string></string>
+				<key>Tool Tip</key>
+				<string>Toggle Word Count</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>bower_components/jquery/dist/jquery.min.js</string>
+				<string>bower_components/underscore/underscore-min.js</string>
+				<string>bower_components/pluralize/pluralize.js</string>
+				<string>bower_components/textistics/textistics.js</string>
+				<string>bower_components/equatable-selection/equatable-selection.js</string>
+				<string>bower_components/selection-listener/selection-listener.js</string>
+				<string>bower_components/periphery-label/periphery-label.js</string>
+				<string>bower_components/selection-counter/selection-counter.js</string>
+				<string>injected.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Counts words in selections</string>
+	<key>DeveloperIdentifier</key>
+	<string>5X7A6P6ZWH</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>https://github.com/jbrudvik/word-count-safari</string>
+</dict>
+</plist>
