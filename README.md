@@ -20,7 +20,7 @@ Not yet released. Follow development instructions for now.
 Not yet released. Follow development instructions for now.
 
 
-## Development
+## Develop
 
 ### Chrome
 
@@ -40,6 +40,6 @@ The `word-count.safariextension` directory contains all files needed by the exte
 
 After installing the dependencies, [add and install the extension using the Safari Extension Builder](https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/UsingExtensionBuilder/UsingExtensionBuilder.html#//apple_ref/doc/uid/TP40009977-CH2-SW5) from the `word-count.safariextension` directory.
 
-## Related
+## See also
 
 - [Character Count](https://github.com/jbrudvik/character-count)
