@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>Jeremy Brudvik</string>
 	<key>Builder Version</key>
-	<string>10600.1.25</string>
+	<string>10600.2.5</string>
 	<key>CFBundleDisplayName</key>
 	<string>Word Count</string>
 	<key>CFBundleIdentifier</key>
@@ -47,7 +47,8 @@
 				<string>bower_components/jquery/dist/jquery.min.js</string>
 				<string>bower_components/underscore/underscore-min.js</string>
 				<string>bower_components/pluralize/pluralize.js</string>
-				<string>bower_components/textistics/textistics.js</string>
+				<string>bower_components/string-stats/string-stats.js</string>
+				<string>bower_components/selection-stats/selection-stats.js</string>
 				<string>bower_components/equatable-selection/equatable-selection.js</string>
 				<string>bower_components/selection-listener/selection-listener.js</string>
 				<string>bower_components/periphery-label/periphery-label.js</string>
