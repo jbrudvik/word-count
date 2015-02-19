@@ -13,5 +13,9 @@
   "camelcase": true,
   "expr": true,
   "curly": false,
-  "browser": true
+  "browser": true,
+  "globals": {
+    "BrowserExtensionToggleButton": false,
+    "SelectionCounter": false
+  }
 }

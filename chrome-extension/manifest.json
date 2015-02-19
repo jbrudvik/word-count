@@ -8,6 +8,7 @@
 
   "background": {
     "scripts": [
+      "bower_components/browser-extension-toggle-button/browser-extension-toggle-button.js",
       "background.js"
     ]
   },
