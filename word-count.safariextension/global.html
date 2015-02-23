@@ -4,15 +4,8 @@
 <script src="bower_components/browser-extension-toggle-button/browser-extension-toggle-button.js"></script>
 <script>
 
-
-
-function handleCommand(event) {
-  if (event.command === 'toggle') {
-    safari.application.activeBrowserWindow.activeTab.page.dispatchMessage('toggle');
-  }
-}
-
-safari.application.addEventListener('command', handleCommand, false);
+var extension = new BrowserExtensionToggleButton();
+extension.listen();
 
 </script>
 </head>
