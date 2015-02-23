@@ -28,7 +28,7 @@
 				<key>Identifier</key>
 				<string>toolbarButton</string>
 				<key>Image</key>
-				<string>toolbar.png</string>
+				<string>inactive.png</string>
 				<key>Label</key>
 				<string>Word Count</string>
 				<key>Palette Label</key>

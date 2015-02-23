@@ -4,7 +4,12 @@
 <script src="bower_components/browser-extension-toggle-button/browser-extension-toggle-button.js"></script>
 <script>
 
-var extension = new BrowserExtensionToggleButton();
+var extension = new BrowserExtensionToggleButton({
+  icon: 'active.png',
+  inactiveIcon: 'inactive.png',
+  title: 'Hide number of words selected',
+  inactiveTitle: 'Show number of words selected'
+});
 extension.listen();
 
 </script>
