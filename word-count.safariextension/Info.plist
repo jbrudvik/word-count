@@ -34,7 +34,7 @@
 				<key>Palette Label</key>
 				<string></string>
 				<key>Tool Tip</key>
-				<string>Toggle Word Count</string>
+				<string>Show number of words selected</string>
 			</dict>
 		</array>
 	</dict>
