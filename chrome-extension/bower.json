@@ -1,5 +1,5 @@
 {
-  "name": "word-count",
+  "name": "word-count-chrome",
   "private": true,
   "dependencies": {
     "browser-extension-toggle-button": "0.2.*",
