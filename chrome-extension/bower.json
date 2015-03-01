@@ -2,7 +2,7 @@
   "name": "word-count",
   "private": true,
   "dependencies": {
-    "browser-extension-toggle-button": "0.1.*",
+    "browser-extension-toggle-button": "0.2.*",
     "selection-counter": "0.1.*"
   }
 }
