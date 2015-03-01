@@ -2,7 +2,7 @@
   "name": "word-count-safari",
   "private": true,
   "dependencies": {
-    "browser-extension-toggle-button": "0.*",
-    "selection-counter": "0.*"
+    "browser-extension-toggle-button": "0.1.*",
+    "selection-counter": "0.1.*"
   }
 }
