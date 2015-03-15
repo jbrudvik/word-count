@@ -8,7 +8,7 @@ A browser extension for viewing the number of words in text selections. When act
 
 Words are counted by splitting selected text on whitespace and considering resulting groups of characters to be words if they contain at least one "alphanumeric" character.
 
-<img src="https://raw.githubusercontent.com/jbrudvik/character-count/master/screenshots/chrome/line-selected-1280x800.jpg" alt="Character Count Chrome screenshot" width="640"/>
+<img src="https://raw.githubusercontent.com/jbrudvik/word-count/master/screenshots/chrome/line-selected-1280x800.jpg" alt="Word Count Chrome screenshot" width="640"/>
 
 ## Install
 
