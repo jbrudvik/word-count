@@ -16,7 +16,7 @@ Words are counted by splitting selected text on whitespace and considering resul
 
 Install from the Chrome Web Store: [https://chrome.google.com/webstore/detail/word-count/iemgpaejfjknfhcahkeijkmickjhnhik](https://chrome.google.com/webstore/detail/word-count/iemgpaejfjknfhcahkeijkmickjhnhik)
 
-Note: Tabs must be reloaded after installing Character Count.
+Note: Tabs must be reloaded after installing.
 
 ### Safari
 
