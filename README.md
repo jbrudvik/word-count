@@ -20,7 +20,9 @@ Note: Tabs must be reloaded after installing.
 
 ### Safari
 
-Not yet released. Follow development instructions for now.
+[https://github.com/jbrudvik/word-count/releases/download/v1.2.0/word-count.safariextz](https://github.com/jbrudvik/word-count/releases/download/v1.2.0/word-count.safariextz)
+
+Note: Tabs must be reloaded after installing.
 
 
 ## Develop
