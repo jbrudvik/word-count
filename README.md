@@ -12,17 +12,15 @@ Words are counted by splitting selected text on whitespace and considering resul
 
 ## Install
 
+Note: Tabs may need to be reloaded after installing.
+
 ### Chrome
 
-Install from the Chrome Web Store: [https://chrome.google.com/webstore/detail/word-count/iemgpaejfjknfhcahkeijkmickjhnhik](https://chrome.google.com/webstore/detail/word-count/iemgpaejfjknfhcahkeijkmickjhnhik)
-
-Note: Tabs must be reloaded after installing.
+[https://chrome.google.com/webstore/detail/word-count/iemgpaejfjknfhcahkeijkmickjhnhik](https://chrome.google.com/webstore/detail/word-count/iemgpaejfjknfhcahkeijkmickjhnhik)
 
 ### Safari
 
 [https://github.com/jbrudvik/word-count/releases/download/v1.2.0/word-count.safariextz](https://github.com/jbrudvik/word-count/releases/download/v1.2.0/word-count.safariextz)
-
-Note: Tabs must be reloaded after installing.
 
 
 ## Develop
