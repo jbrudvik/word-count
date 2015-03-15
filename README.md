@@ -20,7 +20,7 @@ Note: Tabs may need to be reloaded after installing.
 
 ### Safari
 
-[https://github.com/jbrudvik/word-count/releases/download/v1.2.0/word-count.safariextz](https://github.com/jbrudvik/word-count/releases/download/v1.2.0/word-count.safariextz)
+[https://github.com/jbrudvik/word-count/releases/download/v1.2.1/word-count.safariextz](https://github.com/jbrudvik/word-count/releases/download/v1.2.1/word-count.safariextz)
 
 
 ## Develop
