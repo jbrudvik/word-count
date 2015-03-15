@@ -4,7 +4,7 @@
   "name": "Word Count",
   "short_name": "Word Count",
   "description": "Counts words in selections.",
-  "version": "1.1.0",
+  "version": "1.2.0",
 
   "background": {
     "scripts": [
