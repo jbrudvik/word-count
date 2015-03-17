@@ -2,9 +2,9 @@
 
 A browser extension for viewing the number of words in text selections. When activated, the count appears in the top-right corner of the browser window.
 
-- Select text (with mouse or keyboard) to see the number of words.
-- Quickly view the number of words on an entire page using keyboard shortcut (OS X: CMD-a, Windows: CTRL-a).
-- Click the extension button to activate/deactivate. The ESC key can also be used to deactivate.
+- Select text (with mouse or keyboard) to see the number of words
+- Quickly view the number of words on an entire page using keyboard shortcut (OS X: CMD-a, Windows: CTRL-a)
+- Click the extension button to activate/deactivate
 
 Words are counted by splitting selected text on whitespace and considering resulting groups of characters to be words if they contain at least one "alphanumeric" character.
 
@@ -20,7 +20,7 @@ Note: Tabs may need to be reloaded after installing.
 
 ### Safari
 
-[https://github.com/jbrudvik/word-count/releases/download/v1.2.1/word-count.safariextz](https://github.com/jbrudvik/word-count/releases/download/v1.2.1/word-count.safariextz)
+[https://github.com/jbrudvik/word-count/releases/download/v1.3.0/word-count.safariextz](https://github.com/jbrudvik/word-count/releases/download/v1.3.0/word-count.safariextz)
 
 
 ## Develop

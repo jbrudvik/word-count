@@ -3,6 +3,6 @@
   "private": true,
   "dependencies": {
     "browser-extension-toggle-button": "0.2.*",
-    "selection-counter": "0.1.*"
+    "selection-counter": "0.2.*"
   }
 }
