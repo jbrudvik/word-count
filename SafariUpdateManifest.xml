@@ -10,11 +10,11 @@
        <key>Developer Identifier</key>
        <string>5X7A6P6ZWH</string>
        <key>CFBundleVersion</key>
-       <string>1.3.0</string>
+       <string>1.4.0</string>
        <key>CFBundleShortVersionString</key>
-       <string>1.3.0</string>
+       <string>1.4.0</string>
        <key>URL</key>
-       <string>https://github.com/jbrudvik/word-count/releases/download/v1.3.0/word-count.safariextz</string>
+       <string>https://github.com/jbrudvik/word-count/releases/download/v1.4.0/word-count.safariextz</string>
      </dict>
    </array>
 </dict>
