@@ -1,3 +1,4 @@
+/* global BrowserExtensionToggleButton:false */
 
 var extension = new BrowserExtensionToggleButton({
   icon: {
